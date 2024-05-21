@@ -1,0 +1,42 @@
+body {
+     background-image: url(../img/bg.jpg);
+     background-repeat:no-repeat;
+     background-size: cover;
+     background-attachment:fixed;
+   
+}
+table{
+    width:100%;
+}
+
+table, th, td {
+    border:1pc solid black;
+    border-collapse:collapse;
+}
+.wrapper{
+   
+    width:450px;
+    height:350px;
+    background:#fefeff;
+    margin:auto;
+    box-sizing:border-box;
+    border-radius:5px;
+    
+    padding:12px;
+    margin-top:25px;
+}
+.header{
+    font-size:80px;
+    font-weight:600;
+    position:relative;
+    top:30px;
+    left:300px;
+    color:black;
+
+}
+html{
+    scroll-behavior:smooth;
+}
+
+
+

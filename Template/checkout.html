@@ -1,0 +1,242 @@
+{% extends 'base1.html'%}
+{% load mathfilters %}
+{%load static %}
+{% block body_block %}
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Fresh and Organic</p>
+					<h1>Check Out Product</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+<!-- check out section -->
+<div class="checkout-section mt-150 mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="checkout-accordion-wrap">
+					<div class="accordion" id="accordionExample">
+
+						<div class="card single-accordion">
+							<div class="card-header" id="headingOne">
+								<h5 class="mb-0">
+									<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										Billing Address
+									</button>
+								</h5>
+							</div>
+
+							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+								<div class="card-body">
+									<div class="billing-address-form">
+										<form method="post" action="{% url '' %}">
+											<p><input type="text" placeholder="Name" name="name" required></p>
+											<p><input type="email" placeholder="Email" name="email" required></p>
+											<p><input type="text" placeholder="Address" name="address" required></p>
+											<p><input type="tel" placeholder="Phone" name="phone" required></p>
+											{%csrf_token%}
+											<p><textarea name="bill" id="bill" cols="30" rows="10" placeholder="Say Something"></textarea></p>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card single-accordion">
+							<div class="card-header" id="headingTwo">
+								<h5 class="mb-0">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										Shipping Address
+									</button>
+								</h5>
+							</div>
+
+							<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+								<div class="card-body">
+									<div class="shipping-address-form">
+										<form id="myForm">
+											<h4>Choose Your Shipping Address</h4>
+
+											<input type="radio" id="shipping" name="options" value="option1">
+											<label for="shipping">Billing Address</label><br>
+
+
+											<input type="radio" id="other" name="options" value="other" onchange="checkOther()">
+											<label for="other">Other</label><br>
+
+											<div id="otherInput" style="display: none;">
+												<p><textarea name="bill" id="bill" cols="80" rows="6" placeholder="Say Something"></textarea></p>
+											</div>
+											{% csrf_token%}
+
+										</form>
+
+										<script>
+											function checkOther() {
+												var otherInput = document.getElementById('otherInput');
+												var otherRadio = document.getElementById('other');
+
+												if (otherRadio.checked) {
+													otherInput.style.display = 'block';
+												} else {
+													otherInput.style.display = 'none';
+												}
+											}
+										</script>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card single-accordion">
+							<div class="card-header" id="headingThree">
+								<h5 class="mb-0">
+									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										Card Details
+									</button>
+								</h5>
+							</div>
+							<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+								<div class="card-body">
+									<div class="card-details">
+										<form method="post">
+											<h4>Choose Your payment method</h4>
+											<input type="radio" id="cash" name="options" value="option1">
+											<label for="cash">Cash on delivery</label><br>
+											<input type="radio" id="card" name="options" value="option2" onchange="checkcard()">
+											<label for="card">Card</label><br>
+											<div id="cardDetails" style="display: none;">
+												<label for="cardnum">Credit card number</label><br />
+												<input type="text" name="cardnum"><br />
+												<label for="cardType">Choose your card type:</label><br />
+												<input list="type" name="card" placeholder="--please select--" id="cardType"><br />
+												<datalist id="type">
+													<option value="Visa">
+													<option value="Rupay">
+													<option value="Master">
+
+												</datalist>
+												<label for="mon">Expiration Date</label><br />
+												<input type="month" placeholder="Month" id="mon"><br />
+
+												<label for="verifinum">Card verification number</label><br />
+												<input type="text" name="verfinum"><br />
+
+											</div>
+											<input type="radio" id="upi" name="options" value="option3">
+											<label for="upi">UPI</label><br>
+											{% csrf_token %}
+
+										</form>
+
+										<script>
+											function checkcard() {
+												var CardDetails = document.getElementById('cardDetails');
+												var payment = document.getElementById('card');
+
+												if (payment.checked) {
+													CardDetails.style.display = 'block';
+												} else {
+													CardDetails.style.display = 'none';
+												}
+											}
+										</script>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="order-details-wrap">
+					<table class="order-details">
+						<thead>
+							<tr>
+								<th>Your order Details</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody class="order-details-body">
+							<tr>
+								<td>Product</td>
+								<td>Total</td>
+							</tr>
+							{% for item in cart_items %}
+							<tr>
+								<td>{{item.product.ProductName}}</td>
+								{% with n=item.product.SalePrice %}
+								<td>{{n|mul:item.quantity}}</td>
+								{% endwith %}
+							</tr>
+							{% empty %}
+							<tr><h4>No data in cart</h4></tr>
+							{% endfor %}
+						</tbody>
+						<tbody class="checkout-details">
+							{% if cart_items %}
+							<tr>
+								<td><strong>Subtotal</strong></td>
+								<td>{{total_price}}</td>
+							</tr>
+							<tr>
+								<td><strong>Shipping</strong></td>
+								{% with n=cart_items.count %}
+								<td>{{n|mul:40}}</td>
+								{% endwith %}
+							</tr>
+							<tr>
+								<td><strong>Total</strong></td>
+								{% with n=cart_items.count|mul:40 %}
+								<td>{{total_price|add:n}}</td>
+								{% endwith%}
+							</tr>
+							{% endif %}
+						</tbody>
+					</table>
+					<a href="#" class="boxed-btn">Place Order</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end check out section -->
+<!-- logo carousel -->
+<div class="logo-carousel-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="logo-carousel-inner">
+					<div class="single-logo-item">
+						<img src="{% static 'img/company-logos/1.png' %}" alt="">
+					</div>
+					<div class="single-logo-item">
+						<img src="{% static 'img/company-logos/2.png' %}" alt="">
+					</div>
+					<div class="single-logo-item">
+						<img src="{% static 'img/company-logos/3.png' %}" alt="">
+					</div>
+					<div class="single-logo-item">
+						<img src="{% static 'img/company-logos/4.png' %}" alt="">
+					</div>
+					<div class="single-logo-item">
+						<img src="{% static 'img/company-logos/5.png' %}" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end logo carousel -->
+{% endblock %}

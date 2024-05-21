@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+
+    <title>Add Product</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <!-- animate css -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- mean menu css -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+    <!-- main style -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- responsive -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        table {
+            width: 100%;
+        }
+        
+
+    </style>
+
+
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+    <!-- header -->
+    <div class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="{% url '' %}">
+                                <img src="{% static 'img/logo.png' %}" alt="">
+                            </a>
+                        </div>
+                        <!-- logo -->
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+                                <li class="current-list-item">
+                                    <a href="#">Home</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url '' %}">Static Home</a></li>
+                                        <li><a href="{% url 'index2' %}">Slider Home</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'abo' %}">About</a></li>
+                                <li>
+                                    <a href="#">Pages</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url '404' %}">404 page</a></li>
+                                        <li><a href="{% url 'abo' %}">About</a></li>
+                                        <li><a href="{% url 'ca' %}">Cart</a></li>
+                                        <li><a href="{% url 'check' %}">Check Out</a></li>
+                                        <li><a href="{% url 'contc' %}">Contact</a></li>
+                                        <li><a href="{% url 'new' %}">News</a></li>
+                                        <li><a href="{% url 'shopping' %}">Shop</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{% url 'new' %}">News</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'new' %}">News</a></li>
+                                        <li><a href="{% url 'sinnew' %}">Single News</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'contc' %}">Contact</a></li>
+                                <li>
+                                    <a href="{% url 'shopping' %}">Shop</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{% url 'shopping' %}">Shop</a></li>
+                                        <li><a href="{% url 'check' %}">Check Out</a></li>
+                                        <li><a href="{% url 'sinproduct' %}">Single Product</a></li>
+                                        <li><a href="{% url 'ca' %}">Cart</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="header-icons">
+                                        <a class="shopping-cart" href="{% url 'ca' %}"><i class="fas fa-shopping-cart"></i></a>
+                                        <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                        <a href="{% url '' %}"><i class="fa-solid fa-right-from-bracket"></i></a>
+                                        <span style="color:snow;"> <b>WELCOME  {{request.session.admin}}</b></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                        <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                        <div class="mobile-menu"></div>
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+    <!-- breadcrumb-section -->
+    <div class="breadcrumb-section breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="breadcrumb-text">
+                        <p>Fresh and Organic</p>
+                        <h1>Add Product</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end breadcrumb section -->
+    <!-- check out section -->
+    <div class="checkout-section mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="checkout-accordion-wrap">
+                        <div class="accordion" id="accordionExample">
+
+                            <div class="card single-accordion">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Add product
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="billing-address-form">
+                                            <div class="wrapper">
+
+                                                <form method="post" enctype="multipart/form-data">
+                                                    {{form.as_p}}
+                                                    <button type="submit" class="btn btn-warning">Submit</button>
+                                                    {% csrf_token %}
+
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="card single-accordion">
+                                <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Available Product
+                                        </button>
+                                    </h5>
+                                </div>
+
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+
+                                        <div class="wrapper2">
+                                            {% if product %}
+                                            <table border="1">
+                                                <tr>
+                                                    <th> Product ID </th>
+                                                    <th> Product Name	</th>
+                                                    <th> Quantity	</th>
+                                                    <th> Cost price</th>
+                                                    <th> Sale Price</th>
+                                                    <th>Images</th>
+                                                    <th>Delete</th>
+                                                    <th>Update</th>
+
+
+                                                </tr>
+
+                                                {% for i in product %}
+                                                <tr>
+                                                    <td>{{ i.ProductId}}</td>
+                                                    <td> {{ i.ProductName }}</td>
+                                                    <td>{{i.Quantity}} </td>
+                                                    <td>{{ i.CostPrice}}</td>
+                                                    <td>{{ i.SalePrice }}</td>
+                                                    <td><img src="{% static i.Pimage %}" width="100" /></td>
+                                                    <td><a href="{% url 'delete_items' i.ProductId  %}">Delete</a></td>
+
+                                                    <td><a href="{% url 'update_items' i.ProductId %}">Update</a></td>
+
+                                                </tr>
+                                                {% endfor %}
+
+                                            </table>
+                                            {% else %}
+                                            <p>NO ACCESS RECORD FOUND!</p>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- end check out section -->
+    <!--
+
+
+
+        <div class="wrapper">
+        <label class="header">Add Product</label>
+        <form method="post">
+            {{form.as_p}}
+            <button type="submit" class="btn btn-warning">Submit</button>
+            {% csrf_token %}
+
+        </form>
+
+
+    </div>
+
+
+
+
+
+
+    <h1>Available Product</h1>
+    <div class="wrapper2">
+        {% if product %}
+        <table border="1">
+            <tr>
+                <th> Product ID </th>
+                <th> Product Name	</th>
+                <th> Quantity	</th>
+                <th> Cost price</th>
+                <th> Sale Price</th>
+                <th>Delete</th>
+                <th>Update</th>
+
+            </tr>
+
+            {% for i in product %}
+            <tr>
+                <td>{{ i.ProductId}}</td>
+                <td> {{ i.ProductName }}</td>
+                <td>{{i.Quantity}} </td>
+                <td>{{ i.CostPrice}}</td>
+                <td>{{ i.SalePrice }}</td>
+                <td><a href="{% url 'delete_items' i.ProductId  %}">Delete</a></td>
+                <td>Update</td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% else %}
+        <p>NO ACCESS RECORD FOUND!</p>
+        {% endif %}
+    </div>
+        -->
+    <!-- jquery -->
+
+    <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- count down -->
+    <script src="{% static 'js/jquery.countdown.js' %}"></script>
+    <!-- isotope -->
+    <script src="{% static 'js/jquery.isotope-3.0.6.min.js' %}"></script>
+    <!-- waypoints -->
+    <script src="{% static 'js/waypoints.js' %}"></script>
+    <!-- owl carousel -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- magnific popup -->
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- mean menu -->
+    <script src="{% static 'js/jquery.meanmenu.min.js' %}"></script>
+    <!-- sticker js -->
+    <script src="{% static 'js/sticker.js' %}"></script>
+    <!-- main js -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://kit.fontawesome.com/22d0d63377.js" crossorigin="anonymous"></script>
+</body>
+</html>

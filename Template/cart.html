@@ -1,0 +1,169 @@
+{%extends 'base1.html'%}
+{% load mathfilters %}
+{% load static %}
+
+{% block body_block %}
+<!-- breadcrumb-section -->
+<style>
+    input {
+        width: 100px;
+        text-align: center;
+    }
+</style>
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>Fresh and Organic</p>
+					<h1>Cart</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+<!-- cart -->
+<div class="cart-section mt-150 mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-12">
+				<div class="cart-table-wrap">
+					<table class="cart-table">
+						<thead class="cart-table-head">
+							<tr class="table-head-row">
+								<th class="product-remove"></th>
+								<th class="product-image">Product Image</th>
+								<th class="product-name">Name</th>
+								<th class="product-price">Price</th>
+								<th class="product-quantity">Quantity</th>
+								<th class="product-total">Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if cart_items %}
+							{% for item in cart_items %}
+							<tr class="table-body-row">
+								<td class="product-remove"><a href="{% url 'deleteprod' item.product.ProductId %}"><i class="far fa-window-close"></i></a></td>
+								<td class="product-image"><img src="{% static item.product.Pimage %}" alt=""></td>
+								<td class="product-name">{{ item.product.ProductName }}</td>
+								<td class="product-price">{{ item.product.SalePrice }}</td>
+								<td class="product-quantity">
+								
+										<span class="input-group-btn">
+											<a href="{% url 'decrease_quantity' item.product.ProductId %}"><i class="fa fa-minus"></i></a>
+										</span>
+
+										<input type="text" maxlength="1" value="{{ item.quantity }}" disabled>
+
+										<span class="input-group-btn">
+											<a href="{% url 'increase_quantity' item.product.ProductId %}"><i class="fa fa-plus"></i></a>
+										</span>
+								</td>
+								{% with n=item.product.SalePrice %}
+								<td class="product-total" id="total">{{ n|mul:item.quantity }}</td>
+								{% endwith %}
+							</tr>
+							{% endfor %}
+							{% else %}
+							<tr>
+								<td colspan="5"><h4>No data in cart</h4></td>
+							</tr>
+							{% endif %}
+						</tbody>
+
+
+
+					</table>
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="total-section">
+					<table class="total-table">
+						<thead class="total-table-head">
+							<tr class="table-total-row">
+								<th>Total</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if cart_items %}
+							<tr class="total-data">
+								<td><strong>Subtotal: </strong></td>
+								<td class="subtotal">{{total_price}}</td>
+							</tr>
+							<tr class="total-data">
+								<td><strong>Shipping: </strong></td>
+								{% with n=cart_items.count %}
+								<td>{{n|mul:40}}</td>
+								{% endwith %}
+							</tr>
+							<tr class="total-data">
+								<td><strong>Total: </strong></td>
+								{% with n=cart_items.count|mul:40 %}
+								<td>{{total_price|add:n}}</td>
+								{% endwith%}
+
+							</tr>
+							{% endif %}
+						</tbody>
+					</table>
+					<div class="cart-buttons">
+						<a href="{% url 'check' %}" class="boxed-btn black">Check Out</a>
+					</div>
+				</div>
+				<!--
+	
+				<script type="text/javascript">
+					function calculateTotal() {
+
+						var quantityInputs = document.querySelectorAll(".product-quantity input");
+
+						// Get all sale price inputs
+						var salepriceInputs = document.querySelectorAll(".product-price input");
+
+						// Get all total elements
+						var totalElements = document.querySelectorAll("#total");
+
+						// Iterate over each item in the cart
+						for (var i = 0; i < quantityInputs.length; i++) {
+							// Get quantity and sale price for the current item
+							var quantity = parseInt(quantityInputs[i].value);
+							var saleprice = parseFloat(salepriceInputs[i].value);
+
+							// Calculate total amount for the current item
+							var totalamount = quantity * saleprice;
+
+							//subtotal.textContent = sst;
+
+							// Update the total price display element for the current item
+							totalElements[i].innerHTML = totalamount.toFixed(2);
+
+						}
+
+						//console.log(subtotal);
+
+					}
+
+				</script>
+				-->
+				<!--
+				<div class="coupon-section">
+					<h3>Apply Coupon</h3>
+					<div class="coupon-form-wrap">
+						<form action="{% url '' %}">
+							<p><input type="text" placeholder="Coupon"></p>
+							<p><input type="submit" value="Apply"></p>
+						</form>
+					</div>
+				</div>
+
+	-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- end cart -->
+{% endblock %}

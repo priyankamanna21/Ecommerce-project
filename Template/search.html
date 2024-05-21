@@ -1,0 +1,48 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block body_block %}
+
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Fresh and Organic</p>
+                    <h1>Search</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+        <div class="row product-lists">
+            {% if prod %}
+
+            {% for i in prod %}
+            <div class="col-lg-4 col-md-6 text-center strawberry">
+                <div class="single-product-item">
+                    <div class="product-image">
+                        <a href="{% url 'sinproduct' %}"><img src="{% static i.Pimage %}" alt=""></a>
+                    </div>
+                    <h3>{{ i.ProductName }}</h3>
+                    <p class="product-price"><span>Per Kg</span> {{i.SalePrice}} </p>
+                    <a href="{% url 'add_to_cart' i.ProductId %}" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    
+                </div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <p>No access </p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+        {% endblock %}

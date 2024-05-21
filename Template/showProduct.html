@@ -1,0 +1,40 @@
+<!--
+
+<head>
+    <title>Employee Details</title>
+</head>
+
+<body>
+    <h1>Available Product</h1>
+    {% if prod %}
+    <table border="1">
+        <tr>
+        <th> Product ID </th>
+        <th> Product Name	</th>
+        <th> Quantity	</th>
+        <th> Cost price</th>
+        <th> Sale Price</th>
+
+        </tr>
+
+        {% for i in prod %}
+        <tr>
+            <td>{{ i.ProductId}}</td>
+            <td> {{ i.ProductName }}</td>
+            <td>{{i.Quantity}} </td>
+            <td>{{ i.CostPrice}}</td>
+            <td>{{ i.SalePrice }}</td>
+
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% else %}
+    <p>NO ACCESS RECORD FOUND!</p>
+    {% endif %}
+</body>
+</html>
+
+
+-->
+
