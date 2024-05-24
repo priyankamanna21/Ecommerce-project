@@ -1,0 +1,3 @@
+✨ 🎉 🎉Welcome to my Fresh Fruits store✨ 🎉 🎉 
+Basically it is an Ecommerce website using Django(Python).............
+Languages that I have used to make this amazing project-->HTML,CSS ,JS,Bootstrap,Django(Python),SQL
